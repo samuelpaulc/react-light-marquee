@@ -1,0 +1,50 @@
+{
+  "name": "react-light-marquee",
+  "version": "0.1.7",
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+      "dist"
+  ],
+  "devDependencies": {
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0",
+    "@types/react": ">= 16.8.0",
+    "tsup": "^8.2.4",
+    "typescript": "^4.6.3"
+  },
+  "peerDependencies": {
+    "@types/react": ">= 16.8.0",
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelpaulc/react-light-marquee.git"
+  },
+  "homepage": "https://github.com/samuelpaulc/react-light-marquee#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
