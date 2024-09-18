@@ -1,4 +1,6 @@
 # react-light-marquee
+What goes around comes around!
+
 For most cases the number of elements in the dom is equal to number of children i.e it has ***no duplication***. Duplication is only done when it is absolutely necessary.
 
 Lightweight in bundle size and dom footprint.
