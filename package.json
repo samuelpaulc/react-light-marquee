@@ -1,6 +1,6 @@
 {
   "name": "react-light-marquee",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": false,
   "type": "module",
   "main": "./dist/index.js",
@@ -35,6 +35,19 @@
     "url": "git+https://github.com/samuelpaulc/react-light-marquee.git"
   },
   "homepage": "https://github.com/samuelpaulc/react-light-marquee#readme",
+  "keywords": [
+    "marquee",
+    "react-marquee",
+    "reactjs-marquee",
+    "react",
+    "reactjs",
+    "react-component",
+    "reactjs-component",
+    "carousel",
+    "horizontal-marquee",
+    "vertical-marquee",
+    "pausable-marquee"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",

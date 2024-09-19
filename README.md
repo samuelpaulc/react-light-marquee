@@ -1,5 +1,5 @@
 # react-light-marquee
-What goes around comes around!
+What goes around comes around! An ode to the HTML marquee element.
 
 For most cases the number of elements in the dom is equal to number of children i.e it has ***no duplication***. Duplication is only done when it is absolutely necessary.
 
