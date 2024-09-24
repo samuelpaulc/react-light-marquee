@@ -74,47 +74,35 @@ export const getRotateYInDeg = (direction: MarqueeDirection): string => {
 	return deg ? `${rotateStyle}(${deg}deg)` : '';
 };
 
+const getDistanceBetweenEdges = (direction: MarqueeDirection, startRect: DOMRect, endRect: DOMRect): number => {
+	let distance = startRect.bottom - endRect.top; // down
+
+	if (direction === 'left') distance = endRect.right - startRect.left;
+  else if (direction === 'right') distance = startRect.right - endRect.left;
+  else if (direction === 'up') distance = endRect.bottom - startRect.top;
+
+	return distance;
+}
+
 export const getContentSize = (
 	children: HTMLElement[],
 	direction: MarqueeDirection,
 ) => {
 	const firstChildRect = children[0].getBoundingClientRect();
 	const lastChildRect = children[children.length - 1].getBoundingClientRect();
-	if (!firstChildRect || !lastChildRect) return 0;
 
-	if (direction === 'left') {
-		return lastChildRect.right - firstChildRect.left;
-	}
-	if (direction === 'right') {
-		return firstChildRect.right - lastChildRect.left;
-	}
-	if (direction === 'up') {
-		return lastChildRect.bottom - firstChildRect.top;
-	}
-	return firstChildRect.bottom - lastChildRect.top;
+	return getDistanceBetweenEdges(direction, firstChildRect, lastChildRect);
 };
 
 export const getSlideEndingEdge = (
-	node: HTMLUListElement,
+	parentElement: HTMLUListElement,
+	slideElement: HTMLUListElement,
 	direction: MarqueeDirection,
 ): number => {
-	const parentRect = (
-		node.parentNode as HTMLUListElement
-	)?.getBoundingClientRect();
-	if (!parentRect) return 0;
+	const parentRect = parentElement.getBoundingClientRect();
+	const slideRect = slideElement.getBoundingClientRect();
 
-	const slideRect = node.getBoundingClientRect();
-
-	if (direction === 'left') {
-		return slideRect.right - parentRect.left;
-	}
-	if (direction === 'right') {
-		return parentRect.right - slideRect.left;
-	}
-	if (direction === 'up') {
-		return slideRect.bottom - parentRect.top;
-	}
-	return parentRect.bottom - slideRect.top;
+	return getDistanceBetweenEdges(direction, parentRect, slideRect);
 };
 
 const getNodeSize = (
@@ -145,7 +133,7 @@ export const handleReplication = (
 	let needsReplication = false;
 
 	childElements.forEach(slide => {
-		slideEdges.push(getSlideEndingEdge(slide, direction));
+		slideEdges.push(getSlideEndingEdge(wrapper, slide, direction));
 		needsReplication ||=
 			contentSize - getNodeSize(slide, direction) < wrapperSize;
 	});
