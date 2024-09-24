@@ -117,7 +117,7 @@ export const getSlideEndingEdge = (
 	return parentRect.bottom - slideRect.top;
 };
 
-export const getNodeSize = (
+const getNodeSize = (
 	node: HTMLElement,
 	direction: MarqueeDirection,
 ): number => {

@@ -13,6 +13,7 @@ import {
 
 export const Marquee = ({
 	speed = 50,
+	play = true,
 	children = [],
 	direction = 'left',
 	initialSlideIndex = 0,
@@ -46,6 +47,10 @@ export const Marquee = ({
 			!!rule && styleSheet?.insertRule?.(rule, 0);
 
 		[
+			`:root{
+				${playStateVariable}: ${play ? 'running' : 'paused'};
+			}
+			`,
 			`
 			.${wrapperClassName} {
 				width: 100%;
@@ -57,7 +62,6 @@ export const Marquee = ({
 						: 'column'
 				};
 				overflow: hidden;
-				${playStateVariable}: running;
 				transform: ${rotateYInDeg};
 			}
 			`,
@@ -110,9 +114,18 @@ export const Marquee = ({
 		});
 
 		return () => {
+			document.documentElement.style.removeProperty(playStateVariable);
 			document.head.removeChild(styleElement);
 		};
 	}, [marqueeId]);
+
+	useEffect(() => {
+		const wrapper = wrapperRef?.current;
+		if (!wrapper || !marqueeId) return;
+
+		const playStateVariable = getPlayStateVariable(marqueeId);
+		document.documentElement.style.setProperty(playStateVariable, play ? 'running' : 'paused');
+	}, [play]);
 
 	if (!children.length) {
 		return null;

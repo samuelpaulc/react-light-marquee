@@ -38,8 +38,9 @@ Marquee prop list
 | Property | Type | Default value | Details |
 |:--|:--|:--|:--|
 | direction | `left `&#124;`  right  `&#124;`  up  `&#124;` down` | `left` | Direction of motion |
-| speed| number | 50 | Pixel per second |
-| pauseOnHover| boolean | false | `true` pauses the animation on hover |
+| play | boolean | true | plays if true else it is paused |
+| speed | number | 50 | Pixel per second |
+| pauseOnHover | boolean | false | `true` pauses the animation on hover |
 | initialSlideIndex | number | 0 | starting slide index |
 | children | React.ReactNode[] | null | slides to be rendered |
 

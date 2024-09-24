@@ -2,6 +2,7 @@ export type MarqueeDirection = 'left' | 'right' | 'up' | 'down';
 
 export type MarqueeProps = {
 	direction?: MarqueeDirection;
+	play?: boolean;
 	speed?: number;
 	pauseOnHover?: boolean;
 	initialSlideIndex?: number;
