@@ -12,6 +12,7 @@ import {
 } from './utils';
 
 export const Marquee = ({
+	id,
 	speed = 50,
 	play = true,
 	children = [],
@@ -26,7 +27,7 @@ export const Marquee = ({
 	);
 
 	useEffect(() => {
-		setMarqueeId(`marquee_${crypto?.randomUUID() || new Date().getTime()}`);
+		setMarqueeId(`marquee_${id || (Math.random() + '').slice(2)}`);
 	}, []);
 
 	useEffect(() => {
@@ -47,12 +48,10 @@ export const Marquee = ({
 			!!rule && styleSheet?.insertRule?.(rule, 0);
 
 		[
-			`:root{
+			`:root {
 				${playStateVariable}: ${play ? 'running' : 'paused'};
-			}
-			`,
-			`
-			.${wrapperClassName} {
+			}`,
+			`.${wrapperClassName} {
 				width: 100%;
 				height: 100%;
 				display: flex;
@@ -62,15 +61,12 @@ export const Marquee = ({
 						: 'column'
 				};
 				overflow: hidden;
-				transform: ${rotateYInDeg};
-			}
-			`,
+				${rotateYInDeg && `transform: ${rotateYInDeg};`}
+			}`,
 			pauseOnHover
-				? `
-				.${wrapperClassName}:hover {
-					${playStateVariable}: paused;
-				}
-			`
+				? `.${wrapperClassName}:hover {
+						${playStateVariable}: paused;
+					}`
 				: '',
 		].forEach(insertRule);
 

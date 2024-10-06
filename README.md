@@ -5,7 +5,9 @@ For most cases the number of elements in the dom is equal to number of children 
 
 Lightweight in bundle size and dom footprint.
 
-Marquee fills the parent container and renders the children
+Marquee fills the parent container and renders the children by default.
+
+Marquee generates a css class for every instance with specific styles and hence it requires a `id` value to passed in.
 
 # Installation
 
@@ -37,10 +39,11 @@ or
 Marquee prop list
 | Property | Type | Default value | Details |
 |:--|:--|:--|:--|
-| direction | `left `&#124;`  right  `&#124;`  up  `&#124;` down` | `left` | Direction of motion |
+| direction | `left `&#124;`  right  `&#124;`  up  `&#124;` down` | `left` | direction of motion |
+| id | string | null | unique identifier for a marquee instance on a page |
 | play | boolean | true | plays if true else it is paused |
 | speed | number | 50 | Pixel per second |
-| pauseOnHover | boolean | false | `true` pauses the animation on hover |
+| pauseOnHover | boolean | `false` | `true` pauses the animation on hover |
 | initialSlideIndex | number | 0 | starting slide index |
 | children | React.ReactNode[] | null | slides to be rendered |
 
