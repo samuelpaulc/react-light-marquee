@@ -1,10 +1,8 @@
 {
   "name": "react-light-marquee",
-  "version": "0.1.11",
+  "version": "0.1.14",
   "private": false,
-  "type": "module",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
       "dist"

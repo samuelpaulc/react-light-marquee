@@ -78,8 +78,8 @@ const getDistanceBetweenEdges = (direction: MarqueeDirection, startRect: DOMRect
 	let distance = startRect.bottom - endRect.top; // down
 
 	if (direction === 'left') distance = endRect.right - startRect.left;
-  else if (direction === 'right') distance = startRect.right - endRect.left;
-  else if (direction === 'up') distance = endRect.bottom - startRect.top;
+	else if (direction === 'right') distance = startRect.right - endRect.left;
+	else if (direction === 'up') distance = endRect.bottom - startRect.top;
 
 	return distance;
 }

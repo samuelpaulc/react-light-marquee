@@ -1,6 +1,7 @@
 export type MarqueeDirection = 'left' | 'right' | 'up' | 'down';
 
 export type MarqueeProps = {
+	id: string;
 	direction?: MarqueeDirection;
 	play?: boolean;
 	speed?: number;
