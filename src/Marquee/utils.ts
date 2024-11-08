@@ -127,8 +127,8 @@ export const handleReplication = (
 	const wrapperSize = getNodeSize(wrapper, direction);
 	const finalSlides = [...children];
 	const slideEdges: number[] = [];
-	const initialSlidesCount = slideEdges.length;
 	const childElements = Array.from(wrapper.children) as HTMLUListElement[];
+	const initialSlidesCount = childElements.length;
 	let contentSize = getContentSize(childElements, direction);
 	let needsReplication = false;
 
