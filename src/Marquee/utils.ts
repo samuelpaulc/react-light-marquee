@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { MarqueeAnimation, MarqueeDirection } from './interface';
 
 export const getWrapperClassName = (marqueeId: string): string => {
@@ -7,6 +8,18 @@ export const getWrapperClassName = (marqueeId: string): string => {
 export const getPlayStateVariable = (marqueeId: string): string => {
 	return `--${marqueeId}_play_state`;
 };
+
+export const getWrapperStyles = (direction: MarqueeDirection, rotateInDeg: string): CSSProperties => {
+	return {
+		width: '100%',
+		height: '100%',
+		display: 'flex',
+		flexDirection: direction === 'left' || direction === 'right'
+			? 'row' : 'column',
+		overflow: 'hidden',
+		...(rotateInDeg && { transform: rotateInDeg })
+	};
+}
 
 export const handleInitialSlide = (
 	initialSlideIndex: number,
@@ -24,7 +37,7 @@ export const generateSlideStyles = (
 	marqueeId: string,
 	slideIndex: number,
 	translateProp: string,
-	rotateYInDeg: string,
+	rotateInDeg: string,
 	animationConfigs: MarqueeAnimation[],
 ): string[] => {
 	const animations: string[] = [];
@@ -34,8 +47,8 @@ export const generateSlideStyles = (
 		const keyFrameId = `${marqueeId}_keyframe_slide${slideIndex}_${index}`;
 
 		styles.push(`@keyframes ${keyFrameId}  {
-        0% { transform: ${translateProp}(${animation.from}) ${rotateYInDeg}; }
-        100% { transform: ${translateProp}(${animation.to}) ${rotateYInDeg}; }
+        0% { transform: ${translateProp}(${animation.from}) ${rotateInDeg}; }
+        100% { transform: ${translateProp}(${animation.to}) ${rotateInDeg}; }
       }
     `);
 		animations.push(
@@ -57,7 +70,7 @@ export const getTranslateProp = (direction: MarqueeDirection): string => {
 		: 'translateY';
 };
 
-export const getRotateYInDeg = (direction: MarqueeDirection): string => {
+export const getRotateInDeg = (direction: MarqueeDirection): string => {
 	let deg = 0;
 	let rotateStyle = '';
 

@@ -4,9 +4,10 @@ import { MarqueeAnimation, MarqueeProps } from './interface';
 import {
 	generateSlideStyles,
 	getPlayStateVariable,
-	getRotateYInDeg,
+	getRotateInDeg,
 	getTranslateProp,
 	getWrapperClassName,
+	getWrapperStyles,
 	handleInitialSlide,
 	handleReplication,
 } from './utils';
@@ -21,14 +22,11 @@ export const Marquee = ({
 	pauseOnHover = false,
 }: MarqueeProps) => {
 	const wrapperRef = useRef<HTMLUListElement>(null);
-	const [marqueeId, setMarqueeId] = useState('');
+	const [marqueeId] = useState(`marquee_${id || (Math.random() + '').slice(2)}`);
+	const [rotateInDeg] = useState(getRotateInDeg(direction));
 	const [slides, setSlides] = useState<React.ReactNode[]>(() =>
 		handleInitialSlide(initialSlideIndex, children),
 	);
-
-	useEffect(() => {
-		setMarqueeId(`marquee_${id || (Math.random() + '').slice(2)}`);
-	}, []);
 
 	useEffect(() => {
 		const wrapper = wrapperRef?.current;
@@ -43,25 +41,12 @@ export const Marquee = ({
 		const styleSheet = styleElement.sheet;
 		const playStateVariable = getPlayStateVariable(marqueeId);
 		const wrapperClassName = getWrapperClassName(marqueeId);
-		const rotateYInDeg = getRotateYInDeg(direction);
 		const insertRule = (rule: string) =>
 			!!rule && styleSheet?.insertRule?.(rule, 0);
 
 		[
 			`:root {
 				${playStateVariable}: ${play ? 'running' : 'paused'};
-			}`,
-			`.${wrapperClassName} {
-				width: 100%;
-				height: 100%;
-				display: flex;
-				flex-direction: ${
-					direction === 'left' || direction === 'right'
-						? 'row'
-						: 'column'
-				};
-				overflow: hidden;
-				${rotateYInDeg && `transform: ${rotateYInDeg};`}
 			}`,
 			pauseOnHover
 				? `.${wrapperClassName}:hover {
@@ -104,7 +89,7 @@ export const Marquee = ({
 				marqueeId,
 				index,
 				translateProp,
-				rotateYInDeg,
+				rotateInDeg,
 				animationConfigs,
 			).forEach(insertRule);
 		});
@@ -113,7 +98,7 @@ export const Marquee = ({
 			document.documentElement.style.removeProperty(playStateVariable);
 			document.head.removeChild(styleElement);
 		};
-	}, [marqueeId]);
+	}, []);
 
 	useEffect(() => {
 		const wrapper = wrapperRef?.current;
@@ -128,7 +113,7 @@ export const Marquee = ({
 	}
 
 	return (
-		<ul ref={wrapperRef} className={getWrapperClassName(marqueeId)}>
+		<ul ref={wrapperRef} className={getWrapperClassName(marqueeId)} style={getWrapperStyles(direction, rotateInDeg)}>
 			{slides.map((slide, slideIndex) => (
 				<li key={slideIndex}>{slide}</li>
 			))}
