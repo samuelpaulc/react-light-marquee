@@ -17,6 +17,7 @@ export const getWrapperStyles = (direction: MarqueeDirection, rotateInDeg: strin
 		flexDirection: direction === 'left' || direction === 'right'
 			? 'row' : 'column',
 		overflow: 'hidden',
+		listStyle: 'none',
 		...(rotateInDeg && { transform: rotateInDeg })
 	};
 }
